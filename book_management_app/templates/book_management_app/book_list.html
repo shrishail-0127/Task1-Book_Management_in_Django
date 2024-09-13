@@ -1,0 +1,10 @@
+<h1>Book List</h1>
+
+{% for book in books %}
+{% csrf_token %}
+<ul>
+    <li>{{book.title}}</li>
+    <li>{{book.file}}</li>
+    <li>{{book.uploaded_date}}</li>
+</ul>
+{% endfor %}
