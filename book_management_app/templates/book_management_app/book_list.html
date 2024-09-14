@@ -6,10 +6,19 @@
 <html>
 
 <body>
+    <h1>Book List</h1>
+    <form method="GET">
 
-   <h1>Book List</h1>
+        {{ filter.form.as_p }}
+
+    </form>
+
+    
+
+  
     {% if table %}
         {% render_table table %}
+        <a href="">Delete</a>
     {% else %}
         <p>No data available.</p>
     {% endif %}
