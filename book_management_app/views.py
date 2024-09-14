@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib import messages
 from .forms import BookForm
 from .models import Book
+from .tables import BookTable
+
 
 def book_form(request):
     if request.method == 'POST':
@@ -22,4 +24,6 @@ def book_form(request):
 
 def book_list(request):
     books = Book.objects.all()
-    return render(request, 'book_management_app/book_list.html',{'books':books})
+    # print(table)
+    table = BookTable(books)
+    return render(request, 'book_management_app/book_list.html',{'table':table})
