@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404, redirect
 from django.contrib import messages
 from .forms import BookForm
 from .models import Book
@@ -6,15 +6,18 @@ from .tables import BookTable
 from .filters import BookFilter
 
 
+def home(request):
+    return render(request, 'book_management_app/home.html')
+
 def book_form(request):
     if request.method == 'POST':
 
         form = BookForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            messages.info(request, 'Book uploaded successfully!!')
-        else:
-            messages.error(request, 'Please enter valid details')
+            messages.success(request, 'Book uploaded successfully!!')
+            # return redirect('book-list')
+        
 
 
     else:
@@ -35,3 +38,12 @@ def book_list(request):
     # print(table)
     table = BookTable(books)
     return render(request, 'book_management_app/book_list.html',{'table':table, 'filter':book_filter})
+
+
+
+def book_delete(request, pk):
+    if request.method == "POST":
+        book = get_object_or_404(Book, pk=pk)
+        book.delete()
+        return redirect('book-list')
+    

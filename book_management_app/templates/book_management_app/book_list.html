@@ -4,7 +4,17 @@
 
 {% load render_table from django_tables2 %}
 <html>
-
+    <head>
+        <style>
+            table {
+                border-collapse: collapse; 
+                width: 100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
 <body>
     <h1>Book List</h1>
     <form method="GET">
@@ -13,12 +23,9 @@
 
     </form>
 
-    
-
-  
     {% if table %}
         {% render_table table %}
-        <a href="">Delete</a>
+       
     {% else %}
         <p>No data available.</p>
     {% endif %}
